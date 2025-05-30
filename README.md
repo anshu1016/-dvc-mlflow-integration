@@ -1,6 +1,13 @@
 ### Project: Data Pipeline with DVC and MLflow for Machine Learning
 This project demonstrates how to build an end-to-end machine learning pipeline using DVC (Data Version Control) for data and model versioning, and MLflow for experiment tracking. The pipeline focuses on training a Random Forest Classifier on the Pima Indians Diabetes Dataset, with clear stages for data preprocessing, model training, and evaluation.
 
+graph TD;
+    A[Raw Data] --> B[DVC Versioned]
+    B --> C[Preprocessing Script]
+    C --> D[Train Model]
+    D --> E[MLflow Logging]
+    E --> F[Model Saved via DVC]
+
 Key Features of the Project:
 Data Version Control (DVC):
 
@@ -8,7 +15,11 @@ DVC is used to track and version the dataset, models, and pipeline stages, ensur
 The pipeline is structured into stages (preprocessing, training, evaluation) that can be automatically re-executed if any dependencies change (e.g., data, scripts, or parameters).
 DVC also allows remote data storage (e.g., DagsHub, S3) for large datasets and models.
 Experiment Tracking with MLflow:
+> ![alt text](image-1.png)
 
+> ![alt text](image-2.png)
+
+> ![alt text](image-3.png)
 MLflow is used to track experiment metrics, parameters, and artifacts.
 It logs the hyperparameters of the model (e.g., n_estimators, max_depth) and performance metrics like accuracy.
 MLflow helps compare different runs and models to optimize the machine learning pipeline.
@@ -58,3 +69,6 @@ dvc stage add -n train \
 dvc stage add -n evaluate \
     -d src/evaluate.py -d models/model.pkl -d data/raw/data.csv \
     python src/evaluate.py
+
+
+![alt text](image.png)
